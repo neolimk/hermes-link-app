@@ -1,0 +1,20 @@
+# ===== Hermes frpc 客户端配置模板 =====
+# 复制为 frpc.toml 并替换 YOUR_* 占位符。放 C:\frp\frpc.toml
+
+# 云端服务器 IP 和 frps 控制端口
+serverAddr = "YOUR_SERVER_IP"
+serverPort = 7000
+# 连不上时持续重试(默认只试一次就退出)
+loginFailExit = false
+
+# 与云端 frps.toml 里一致的令牌
+auth.method = "token"
+auth.token = "YOUR_SHARED_TOKEN"
+
+# 把本机 9119 (hermes dashboard) 暴露到云端 18787(nginx 反代目标)
+[[proxies]]
+name = "hermes-dashboard"
+type = "tcp"
+localIP = "127.0.0.1"
+localPort = 9119
+remotePort = 18787
